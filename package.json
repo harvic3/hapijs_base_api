@@ -1,0 +1,46 @@
+{
+		"name": "hapijs_base_api",
+		"version": "1.0.0",
+		"description": "API with HapiJs",
+		"main": "index.js",
+		"scripts": {
+				"start": "node .",
+				"dev": "nodemon .",
+				"eslint": "./node_modules/.bin/eslint .",
+				"pretty-quick": "pretty-quick",
+				"pretty-check": "pretty-quick --check",
+				"precommit": "npm run eslint --fix && npm run pretty-quick --staged"
+		},
+		"author": "Vickodev @harvic3",
+		"license": "MIT",
+		"devDependencies": {
+				"eslint": "^6.1.0",
+				"eslint-config-prettier": "^6.0.0",
+				"eslint-plugin-prettier": "^3.1.0",
+				"husky": "^3.0.2",
+				"lint-staged": "^9.2.1",
+				"nodemon": "^1.19.1",
+				"prettier": "^1.18.2",
+				"pretty-quick": "^1.11.1"
+		},
+		"dependencies": {
+				"@hapi/boom": "^8.0.1",
+				"@hapi/hapi": "^18.4.0",
+				"@hapi/hoek": "^8.3.0",
+				"@hapi/joi": "^15.1.1",
+				"@sentry/node": "5.6.2",
+				"dotenv": "^8.1.0",
+				"firebase-admin": "^8.6.0",
+				"glob": "^7.1.4",
+				"hapi-sentry": "^2.0.3",
+				"hoek": "^6.1.3",
+				"knex": "^0.19.5",
+				"moment": "^2.24.0",
+				"pg": "^7.12.1"
+		},
+		"husky": {
+				"hooks": {
+						"pre-commit": "npm run precommit"
+				}
+		}
+}

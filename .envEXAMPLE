@@ -1,0 +1,9 @@
+APP_NAME=
+NODE_ENV=
+ROOT_END_POINT=
+FIREBASE=
+PG_CONNECTION=postgres://username:password@localhost/database
+SENTRY_DSN=
+CORS_ORIGINS=
+MONGO_DB=
+BD_URL=

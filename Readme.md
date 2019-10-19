@@ -15,7 +15,7 @@ In the /config folder there is a configuration file `config.js` which has the de
 `HOST`: default http://localhost
 `PORT`: default :9000
 `corsOrigins`: HTTP access control default http://localhost:9000
-`sentry`: You need to inform the Sentry Node SDK about your DSN
+`sentry`: You need to inform the Sentry Node SDK about your DSN.
 `mongodb`: database URL from MongoDB
 `postgres`: postgres database connection
 
@@ -23,7 +23,7 @@ In the /config folder there is a configuration file `config.js` which has the de
 
 ## How to Set up
 
-**Step 1:** Install the Application's dependencies
+**Step 1:** Install the Application's dependencies.
 Please use yarn instead of npm for this process.
 with `yarn` or `npm i`.
 

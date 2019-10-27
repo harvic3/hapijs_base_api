@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-const Controller = require('../controllers');
+const Controller = require('../controller');
 
 module.exports = {
   method: 'POST',
@@ -19,19 +19,18 @@ module.exports = {
           .min(7)
           .required(),
         roleId: Joi.number().required(),
-        creationDate: Joi.date(),
         companyId: Joi.number().required(),
         phoneNumber: Joi.string()
           .min(12)
           .required(),
         disabled: Joi.bool().default(false),
         deleted: Joi.bool().default(false),
-      }).options({ allowUnknown: true }),
+      }).options({ allowUnknown: false }),
     },
     auth: {
       strategy: 'firebase',
       scope: ['root', 'admin'],
     },
-    description: 'Create a user',
+    description: 'Crear usuario',
   },
 };

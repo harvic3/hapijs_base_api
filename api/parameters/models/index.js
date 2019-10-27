@@ -1,20 +1,17 @@
-const ParamSchema = require('../schemes/parameter');
-let dbContext;
+const db = require('../../../repository/dbRepository');
 
-const init = pgDbContext => {
-  pgDbContext.then(result => {
-    this.dbContext = result;
-  });
+const getDbContext = () => {
+  return db.getDbInstance({});
 };
 
 const getParameterByName = async paramName => {
-  var result = await this.dbContext('Parameters')
+  const dbContext = getDbContext();
+  var result = await dbContext('Parameters')
     .where('name', paramName)
     .first();
   return result || null;
 };
 
 module.exports = {
-  init,
   getParameterByName,
 };

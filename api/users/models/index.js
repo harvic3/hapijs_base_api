@@ -1,49 +1,50 @@
-const UserSchema = require('../schemes/user');
-let dbContext;
+const db = require('../../../repository/dbRepository');
 
-const init = pgDbContext => {
-  pgDbContext.then(result => {
-    this.dbContext = result;
-  });
+const getDbContext = () => {
+  return db.getDbInstance({});
 };
 
 const createUser = async user => {
-  return this.dbContext('Users').insert(user, '*');
+  const dbContext = getDbContext();
+  return dbContext('Users').insert(user, '*');
 };
 
 const updateUser = async (uid, userData) => {
-  return this.dbContext('Users')
+  const dbContext = getDbContext();
+  return dbContext('Users')
     .update(userData)
     .where('uid', uid);
 };
 
 const getUser = async uid => {
-  return this.dbContext('Users')
+  const dbContext = getDbContext();
+  return dbContext('Users')
     .where('uid', uid)
-    .select()
+    .select('*')
     .first();
 };
 
 const getUsers = async () => {
-  var result = await this.dbContext
+  const dbContext = getDbContext();
+  var result = await dbContext('Users')
     .select('*')
-    .from('Users')
     .where('deleted', false);
   return result;
 };
 
 const getUsersByCompanyId = async companyId => {
-  return this.dbContext('Users')
+  const dbContext = getDbContext();
+  return dbContext('Users')
     .select('*')
     .where('companyId', companyId);
 };
 
 const getRoles = async () => {
-  return this.dbContext('Roles');
+  const dbContext = getDbContext();
+  return dbContext('Roles').select('*');
 };
 
 module.exports = {
-  init,
   createUser,
   updateUser,
   getUser,

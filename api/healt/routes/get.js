@@ -1,5 +1,4 @@
-const Controller = require('../controllers');
-const { Result, flowResult } = require('../../../utils/result');
+const Controller = require('../controller');
 
 module.exports = {
   method: 'GET',
@@ -9,6 +8,6 @@ module.exports = {
     return controller.getStatus();
   },
   options: {
-    description: 'Check the api state',
+    description: 'Monitorea el estado del servicio',
   },
 };

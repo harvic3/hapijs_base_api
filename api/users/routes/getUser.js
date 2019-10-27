@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-const Controller = require('../controllers');
+const Controller = require('../controller');
 
 module.exports = [
   {
@@ -14,7 +14,7 @@ module.exports = [
         strategy: 'firebase',
         scope: 'root',
       },
-      description: 'Get all users',
+      description: 'Obtener todos los usuarios',
     },
   },
   {
@@ -32,9 +32,9 @@ module.exports = [
       },
       auth: {
         strategy: 'firebase',
-        scope: ['root', 'admin'],
+        scope: ['root', 'admin', 'operator'],
       },
-      description: 'Get a user',
+      description: 'Obtener un usuario',
     },
   },
   {
@@ -54,7 +54,7 @@ module.exports = [
         strategy: 'firebase',
         scope: ['root', 'admin'],
       },
-      description: 'Get all users of company',
+      description: 'Obtener todos los usuarios de una compañía',
     },
   },
   {
@@ -69,7 +69,7 @@ module.exports = [
         strategy: 'firebase',
         scope: ['root', 'admin'],
       },
-      description: 'Get user roles',
+      description: 'Obtener todos los roles',
     },
   },
 ];

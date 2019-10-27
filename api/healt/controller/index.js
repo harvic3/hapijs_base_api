@@ -2,13 +2,18 @@
 const Controller = require('../../../utils/controller');
 const config = require('../../../config/config');
 const { Result, flowResult } = require('../../../utils/result');
+const db = require('../../../repository/dbRepository');
+
+const getDbContext = () => {
+  return db.getDbInstance({});
+};
 
 class statusController extends Controller {
   async getStatus() {
     const result = new Result();
     try {
-      const db = await this.instancePgDb();
-      const query = await db('Parameters');
+      const dbContext = getDbContext();
+      const query = await dbContext('Parameters');
       result.data = {
         module: config.project.name,
         api: 'online',
@@ -17,7 +22,7 @@ class statusController extends Controller {
       };
       result.flow = flowResult.success;
     } catch (error) {
-      throw Boom.badRequest(error.message);
+      return Boom.badRequest(error.message);
     }
     return result;
   }

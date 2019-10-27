@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-const Controller = require('../controllers');
+const Controller = require('../controller');
 
 module.exports = {
   method: 'GET',
@@ -16,8 +16,8 @@ module.exports = {
     },
     auth: {
       strategy: 'firebase',
-      scope: ['root','admin'],
+      scope: 'root',
     },
-    description: 'Get the params',
+    description: 'Obtener los parámetros',
   },
 };

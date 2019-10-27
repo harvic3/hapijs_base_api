@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-const Controller = require('../controllers');
+const Controller = require('../controller');
 
 module.exports = {
   method: 'PUT',
@@ -30,14 +30,14 @@ module.exports = {
         phoneNumber: Joi.string()
           .min(12)
           .required(),
-        disabled: Joi.bool().default(false),
-        deleted: Joi.bool().default(false),
-      }).options({ allowUnknown: true }),
+        disabled: Joi.bool().required(),
+        deleted: Joi.bool().required(),
+      }).options({ allowUnknown: false }),
     },
     auth: {
       strategy: 'firebase',
       scope: ['root', 'admin'],
     },
-    description: 'Update a user',
+    description: 'Actualiza un usuario',
   },
 };

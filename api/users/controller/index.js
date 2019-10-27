@@ -11,7 +11,6 @@ class UserController extends Controller {
       request.server.registrations.firebase.options.firebaseAdminContext;
     Hoek.assert(firebaseContext != null, Boom.badGateway());
     this.firebaseContext = firebaseContext;
-    UserModel.init(this.instancePgDb());
   }
 
   validateCompanyActionRule(credentials, companyId) {
@@ -55,12 +54,18 @@ class UserController extends Controller {
   }
 
   async getUserFromFirebase(uid) {
-    return await this.firebaseContext
-      .auth()
-      .getUser(uid)
-      .catch(err => {
-        throw Boom.badRequest(`${err.message} code error: ${err.code}`);
-      });
+    return await this.firebaseContext.auth().getUser(uid);
+  }
+
+  async getUsers() {
+    const result = new Result();
+    try {
+      result.data = await UserModel.getUsers();
+      result.flow = flowResult.success;
+    } catch (error) {
+      throw Boom.badRequest(error.message);
+    }
+    return result;
   }
 
   async getUser(uid) {
@@ -69,11 +74,9 @@ class UserController extends Controller {
       result.data = await UserModel.getUser(uid);
       result.flow = flowResult.success;
     } catch (error) {
-      result.flow = flowResult.failed;
-      result.message = error.message;
-      throw Boom.badRequest(result);
+      throw Boom.badRequest(error.message);
     }
-    return h.response(result).code(flowResult.code);
+    return result;
   }
 
   async createUser(user) {
@@ -93,7 +96,7 @@ class UserController extends Controller {
       const claims = this.buildClaims(user, roles.data);
       await this.addCustomClaims(user.uid, claims);
       result.flow = flowResult.success;
-      result.message = 'The user was created';
+      result.message = 'El usuario fue creado.';
     } catch (error) {
       throw Boom.badRequest(error.message);
     }
@@ -118,18 +121,7 @@ class UserController extends Controller {
       delete user.password;
       result.data = await UserModel.updateUser(uid, user);
       result.flow = flowResult.success;
-      result.message = 'The user was updated';
-    } catch (error) {
-      throw Boom.badRequest(error.message);
-    }
-    return result;
-  }
-
-  async getUsers() {
-    const result = new Result();
-    try {
-      result.data = await UserModel.getUsers();
-      result.flow = flowResult.success;
+      result.message = 'El usuario fue actualizado.';
     } catch (error) {
       throw Boom.badRequest(error.message);
     }

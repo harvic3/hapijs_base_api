@@ -6,4 +6,4 @@ PG_CONNECTION=postgres://username:password@localhost/database
 SENTRY_DSN=
 CORS_ORIGINS=
 MONGO_DB=
-BD_URL=
+DB_URL=

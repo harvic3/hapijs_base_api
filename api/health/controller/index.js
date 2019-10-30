@@ -1,4 +1,5 @@
 //const mongoose = require('mongoose');
+const Boom = require('@hapi/boom');
 const Controller = require('../../../utils/controller');
 const config = require('../../../config/config');
 const { Result, flowResult } = require('../../../utils/result');

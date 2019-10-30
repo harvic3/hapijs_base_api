@@ -11,7 +11,7 @@ module.exports = {
     sentry: process.env.SENTRY_DSN || '',
     postgresdb: process.env.PG_CONNECTION || '',
     mongodb: process.env.MONGO_DB || '',
-    databaseURL: process.env.BD_URL || '',
+    databaseURL: process.env.DB_URL || '',
   },
   firebase: process.env.FIREBASE || '',
 };

@@ -1,11 +1,9 @@
 const path = require('path');
 const firebase = require('firebase-admin');
 const HapiSentry = require('hapi-sentry');
-const Sentry = require('@sentry/node');
 const config = require('../config/config');
 const Routes = require('./routes');
 const firebaseAuth = require('./firebase-auth');
-Sentry.init({ dsn: config.project.sentry });
 
 const register = async server => {
   // await server.register({

@@ -6,24 +6,7 @@ const Routes = require('./routes');
 const firebaseAuth = require('./firebase-auth');
 
 const register = async server => {
-  // await server.register({
-  //   plugin: Mongoose,
-  //   options: {
-  //     uri: config.project.mongodb,
-  //     config: {
-  //       useFindAndModify: false,
-  //       useNewUrlParser: true,
-  //     },
-  //   },
-  // });
-
-  // await server.register({
-  //   plugin: Knexpg,
-  //   options: {
-  //     connection: config.project.postgresdb,
-  //   },
-  // });
-
+  
   await server.register({
     plugin: firebaseAuth,
     options: {

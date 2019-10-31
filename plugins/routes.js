@@ -3,7 +3,7 @@ const path = require('path');
 const config = require('../config/config');
 
 const routesPlugin = {
-  name: 'hapiHighway',
+  name: 'hapiRoutes',
   version: '1.0.0',
   register(server, options) {
     const dirname = options.dirname || __dirname;

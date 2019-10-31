@@ -2,7 +2,6 @@ const Hoek = require('hoek');
 const Boom = require('@hapi/boom');
 const Controller = require('../../../utils/controller');
 const UserModel = require('../models');
-const { Result, flowResult } = require('../../../utils/result');
 
 class UserController extends Controller {
   constructor(request) {
@@ -58,10 +57,9 @@ class UserController extends Controller {
   }
 
   async getUsers() {
-    const result = new Result();
+    const result = this.result();
     try {
       result.data = await UserModel.getUsers();
-      result.flow = flowResult.success;
     } catch (error) {
       throw Boom.badRequest(error.message);
     }
@@ -69,10 +67,9 @@ class UserController extends Controller {
   }
 
   async getUser(uid) {
-    const result = new Result();
+    const result = this.result();
     try {
       result.data = await UserModel.getUser(uid);
-      result.flow = flowResult.success;
     } catch (error) {
       throw Boom.badRequest(error.message);
     }
@@ -80,7 +77,7 @@ class UserController extends Controller {
   }
 
   async createUser(user) {
-    const result = new Result();
+    const result = this.result();
     try {
       this.validateCompanyActionRule(
         this.request.auth.credentials,
@@ -95,7 +92,6 @@ class UserController extends Controller {
       result.data = await UserModel.createUser(user);
       const claims = this.buildClaims(user, roles.data);
       await this.addCustomClaims(user.uid, claims);
-      result.flow = flowResult.success;
       result.message = 'El usuario fue creado.';
     } catch (error) {
       throw Boom.badRequest(error.message);
@@ -104,7 +100,7 @@ class UserController extends Controller {
   }
 
   async updateUser(uid, user) {
-    const result = new Result();
+    const result = this.result();
     try {
       this.validateCompanyActionRule(
         this.request.auth.credentials,
@@ -120,7 +116,6 @@ class UserController extends Controller {
       await this.firebaseContext.auth().updateUser(uid, user);
       delete user.password;
       result.data = await UserModel.updateUser(uid, user);
-      result.flow = flowResult.success;
       result.message = 'El usuario fue actualizado.';
     } catch (error) {
       throw Boom.badRequest(error.message);
@@ -129,11 +124,10 @@ class UserController extends Controller {
   }
 
   async getUsersByCompanyId(companyId) {
-    const result = new Result();
+    const result = this.result();
     try {
       this.validateCompanyActionRule(this.request.auth.credentials, companyId);
       result.data = await UserModel.getUsersByCompanyId(companyId);
-      result.flow = flowResult.success;
     } catch (error) {
       throw Boom.badRequest(error.message);
     }
@@ -141,12 +135,11 @@ class UserController extends Controller {
   }
 
   async getRoles() {
-    const result = new Result();
+    const result = this.result();
     try {
       const roles = await UserModel.getRoles();
       this.validateDataRoleRule(this.request.auth.credentials, roles);
       result.data = roles;
-      result.flow = flowResult.success;
     } catch (error) {
       throw Boom.badRequest(error.message);
     }

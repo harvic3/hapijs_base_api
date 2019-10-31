@@ -1,17 +1,15 @@
-//const mongoose = require('mongoose');
 const Boom = require('@hapi/boom');
 const Controller = require('../../../utils/controller');
 const config = require('../../../config/config');
-const { Result, flowResult } = require('../../../utils/result');
 const db = require('../../../repository/dbRepository');
 
 const getDbContext = () => {
   return db.getDbInstance({});
 };
 
-class statusController extends Controller {
+class StatusController extends Controller {
   async getStatus() {
-    const result = new Result();
+    const result = this.result();
     try {
       const dbContext = getDbContext();
       const query = await dbContext('Parameters');
@@ -19,9 +17,7 @@ class statusController extends Controller {
         module: config.project.name,
         api: 'online',
         pg_db: !!(query && query.length >= 0) ? 'online' : 'offline',
-        // db: mongoose.connection.readyState === 1,
       };
-      result.flow = flowResult.success;
     } catch (error) {
       return Boom.badRequest(error.message);
     }
@@ -29,4 +25,4 @@ class statusController extends Controller {
   }
 }
 
-module.exports = statusController;
+module.exports = StatusController;

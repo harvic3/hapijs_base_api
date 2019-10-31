@@ -1,16 +1,24 @@
-//const mongoose = require('mongoose');
+'use strict';
 
 class Controller {
   constructor(request) {
     this.request = request;
+    this.flowResult = {
+      success: 'success',
+      failed: 'failed',
+      skipped: 'skipped',
+    };
   }
-  // async instancePgDb() {
-  //   return this.request.server.plugins.knex_pg.pg_db();
-  // }
 
-  // ObjectId() {
-  // 	return mongoose.Types.ObjectId;
-  // }
+  result() {
+    return {
+      data: null,
+      message: null,
+      flow: this.flowResult.success,
+      statusCode: 200,
+      error: null,
+    };
+  }
 }
 
 module.exports = Controller;

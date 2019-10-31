@@ -1,7 +1,6 @@
 const Boom = require('@hapi/boom');
 const Controller = require('../../../utils/controller');
 const ParamModel = require('../models');
-const { Result, flowResult } = require('../../../utils/result');
 
 class ParameterController extends Controller {
   constructor(request) {
@@ -9,10 +8,9 @@ class ParameterController extends Controller {
   }
 
   async getParameterByName(parameterName) {
-    const result = new Result();
+    const result = this.result();
     try {
       result.data = await ParamModel.getParameterByName(parameterName);
-      result.flow = flowResult.success;
     } catch (error) {
       throw Boom.badRequest(error.message);
     }

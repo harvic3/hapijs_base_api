@@ -13,5 +13,8 @@ module.exports = {
     mongodb: process.env.MONGO_DB || '',
     databaseURL: process.env.DB_URL || '',
   },
-  firebase: process.env.FIREBASE || '',
+  firebase: {
+    credentials: process.env.FIREBASE_CREDENTIALS || '',
+    dbUrl: process.env.FIREBASE_DB_URL || '',
+  }
 };

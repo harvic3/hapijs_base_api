@@ -6,8 +6,10 @@ const server = require('./server');
 
 const start = async () => {
   firebase.initializeApp({
-    credential: firebase.credential.cert(JSON.parse(config.firebase)),
-    databaseURL: config.project.databaseURL,
+    credential: firebase.credential.cert(
+      JSON.parse(config.firebase.credentials)
+    ),
+    databaseURL: config.firebase.dbUrl,
   });
   await server.init(firebase);
   console.log(
